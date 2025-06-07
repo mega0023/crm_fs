@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM 974745836</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    header { background-color: #2a9d8f; color: white; padding: 1rem; text-align: center; }
+    nav { background-color: #264653; padding: 1rem; color: white; }
+    nav a { color: white; margin-right: 1rem; text-decoration: none; }
+    section { padding: 2rem; display: none; background: white; margin: 1rem; border-radius: 10px; }
+    section.active { display: block; }
+    .login { max-width: 300px; margin: 5rem auto; padding: 2rem; border: 1px solid #ccc; border-radius: 10px; background-color: white; }
+    .login input { width: 100%; margin-bottom: 1rem; padding: 0.5rem; }
+    .login button { width: 100%; padding: 0.5rem; background: #2a9d8f; color: white; border: none; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    th { background-color: #e9ecef; }
+    input, select { padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
+    button.action { background-color: #2a9d8f; color: white; border: none; padding: 0.5rem 1rem; margin-top: 0.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="login" id="loginScreen">
+    <h2>Ingreso al CRM</h2>
+    <input type="text" id="user" placeholder="Usuario" />
+    <input type="password" id="974745836" placeholder="Contraseña" />
+    <button onclick="login()">Ingresar</button>
+  </div>
+
+  <div id="mainApp" style="display:none">
+    <header>
+      <h1>Software CRM 974745836</h1>
+    </header>
+    <nav>
+      <a href="#" onclick="showSection('dashboard')">Panel Principal</a>
+      <a href="#" onclick="showSection('pacientes')">Prospectos</a>
+      <a href="#" onclick="showSection('citas')">Agenda de Citas</a>
+      <a href="#" onclick="showSection('tratamientos')">Servicios</a>
+      <a href="#" onclick="showSection('facturacion')">Facturación</a>
+    </nav>
+
+    <section id="dashboard" class="active">
+      <h2>Panel Principal</h2>
+      <p>Bienvenido al sistema CRM de Future System.</p>
+    </section>
+
+    <section id="pacientes">
+      <h2>Módulo de Prospectos</h2>
+      <form onsubmit="addPaciente(event)">
+        <input type="text" id="nombrePaciente" placeholder="Nombre" required />
+        <input type="text" id="dniPaciente" placeholder="Servicio" required />
+        <input type="text" id="telefonoPaciente" placeholder="Celular" />
+        <button class="action">Agregar Prospecto</button>
+      </form>
+      <table id="tablaPacientes">
+        <thead>
+          <tr><th>Nombre</th><th>Servicio</th><th>Celular</th><th>Acciones</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="citas">
+      <h2>Agenda de Citas</h2>
+      <form onsubmit="addCita(event)">
+        <input type="text" id="pacienteCita" placeholder="Nombre del prospecto" required />
+        <input type="datetime-local" id="fechaCita" required />
+        <select id="odontologoCita">
+          <option value="Coni Salazar">Coni Salazar</option>
+          <option value="Renzo Martínez">Renzo Martínez</option>
+          <option value="Sahory Fuller">Sahory Fuller</option>
+        </select>
+        <select id="servicioCita">
+          <option value="SGV">SGV</option>
+          <option value="Instalacion Camaras">Instalacion Camaras</option>
+          <option value="Facturacion Electronica">Facturacion Electronica</option>
+        </select>
+        <button class="action">Agendar Cita</button>
+      </form>
+      <table id="tablaCitas">
+        <thead>
+          <tr><th>Prospecto</th><th>Fecha</th><th>Asesor</th><th>Servicio</th><th>Acciones</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="tratamientos">
+      <h2>Gestión de Servicios</h2>
+      <form onsubmit="addTratamiento(event)">
+        <input type="text" id="pacienteTratamiento" placeholder="Nombre del Cliente" required />
+        <input type="text" id="tipoTratamiento" placeholder="Servicio" required />
+        <select id="estadoTratamiento">
+          <option value="Pendiente">Pendiente</option>
+          <option value="En progreso">En progreso</option>
+          <option value="Finalizado">Finalizado</option>
+        </select>
+        <button class="action">Registrar Servicio</button>
+      </form>
+      <table id="tablaTratamientos">
+        <thead>
+          <tr><th>Cliente</th><th>Servicio</th><th>Estado</th><th>Acciones</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="facturacion">
+      <h2>Facturación y Pagos</h2>
+      <form onsubmit="addFactura(event)">
+        <input type="text" id="pacienteFactura" placeholder="Cliente" required />
+        <input type="number" id="montoFactura" placeholder="Monto" required />
+        <select id="metodoPago">
+          <option value="Efectivo">Efectivo</option>
+          <option value="Yape">Yape</option>
+          <option value="Deposito">Deposito</option>
+        </select>
+        <button class="action">Registrar Pago</button>
+      </form>
+      <table id="tablaFacturacion">
+        <thead>
+          <tr><th>Paciente</th><th>Monto</th><th>Método</th><th>Acciones</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    let pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+    let citas = JSON.parse(localStorage.getItem('citas')) || [];
+    let tratamientos = JSON.parse(localStorage.getItem('tratamientos')) || [];
+    let facturas = JSON.parse(localStorage.getItem('facturas')) || [];
+
+    function login() {
+      const username = document.getElementById('user').value;
+      const password = document.getElementById('974745836').value;
+      if (username && password) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        renderPacientes();
+        renderCitas();
+        renderTratamientos();
+        renderFacturas();
+      } else {
+        alert('Por favor ingrese usuario y contraseña.');
+      }
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Pacientes
+    function renderPacientes() {
+      const tabla = document.getElementById('tablaPacientes').querySelector('tbody');
+      tabla.innerHTML = '';
+      pacientes.forEach((p, i) => {
+        tabla.innerHTML += `<tr><td>${p.nombre}</td><td>${p.servicio}</td><td>${p.telefono}</td><td><button onclick="editarPaciente(${i})">Editar</button><button onclick="eliminarPaciente(${i})">Eliminar</button></td></tr>`;
+      });
+    }
+    function addPaciente(event) {
+      event.preventDefault();
+      pacientes.push({ nombre: nombrePaciente.value, servicio: dniPaciente.value, telefono: telefonoPaciente.value });
+      localStorage.setItem('pacientes', JSON.stringify(pacientes));
+      renderPacientes();
+      event.target.reset();
+    }
+    function eliminarPaciente(i) {
+      pacientes.splice(i, 1);
+      localStorage.setItem('pacientes', JSON.stringify(pacientes));
+      renderPacientes();
+    }
+    function editarPaciente(i) {
+      const p = pacientes[i];
+      pacientes[i] = {
+        nombre: prompt("Nombre", p.nombre),
+        servicio: prompt("Servicio", p.servicio),
+        telefono: prompt("Teléfono", p.telefono)
+      };
+      localStorage.setItem('pacientes', JSON.stringify(pacientes));
+      renderPacientes();
+    }
+
+    // Citas
+    function renderCitas() {
+      const tabla = document.getElementById('tablaCitas').querySelector('tbody');
+      tabla.innerHTML = '';
+      citas.forEach((c, i) => {
+        tabla.innerHTML += `<tr><td>${c.paciente}</td><td>${c.fecha}</td><td>${c.odontologo}</td><td>${c.servicio}</td><td><button onclick="editarCita(${i})">Editar</button><button onclick="eliminarCita(${i})">Eliminar</button></td></tr>`;
+      });
+    }
+    function addCita(event) {
+      event.preventDefault();
+      citas.push({ paciente: pacienteCita.value, fecha: fechaCita.value, odontologo: odontologoCita.value, servicio: servicioCita.value });
+      localStorage.setItem('citas', JSON.stringify(citas));
+      renderCitas();
+      event.target.reset();
+    }
+    function eliminarCita(i) {
+      citas.splice(i, 1);
+      localStorage.setItem('citas', JSON.stringify(citas));
+      renderCitas();
+    }
+    function editarCita(i) {
+      const c = citas[i];
+      citas[i] = {
+        paciente: prompt("Paciente", c.paciente),
+        fecha: prompt("Fecha", c.fecha),
+        odontologo: prompt("Asesor", c.odontologo),
+        servicio: prompt("Servicio", c.servicio)
+      };
+      localStorage.setItem('citas', JSON.stringify(citas));
+      renderCitas();
+    }
+
+    // Tratamientos
+    function renderTratamientos() {
+      const tabla = document.getElementById('tablaTratamientos').querySelector('tbody');
+      tabla.innerHTML = '';
+      tratamientos.forEach((t, i) => {
+        tabla.innerHTML += `<tr><td>${t.paciente}</td><td>${t.servicio}</td><td>${t.estado}</td><td><button onclick="editarTratamiento(${i})">Editar</button><button onclick="eliminarTratamiento(${i})">Eliminar</button></td></tr>`;
+      });
+    }
+    function addTratamiento(event) {
+      event.preventDefault();
+      tratamientos.push({ paciente: pacienteTratamiento.value, servicio: tipoTratamiento.value, estado: estadoTratamiento.value });
+      localStorage.setItem('tratamientos', JSON.stringify(tratamientos));
+      renderTratamientos();
+      event.target.reset();
+    }
+    function eliminarTratamiento(i) {
+      tratamientos.splice(i, 1);
+      localStorage.setItem('tratamientos', JSON.stringify(tratamientos));
+      renderTratamientos();
+    }
+    function editarTratamiento(i) {
+      const t = tratamientos[i];
+      tratamientos[i] = {
+        paciente: prompt("Cliente", t.paciente),
+        servicio: prompt("Servicio", t.servicio),
+        estado: prompt("Estado", t.estado)
+      };
+      localStorage.setItem('tratamientos', JSON.stringify(tratamientos));
+      renderTratamientos();
+    }
+
+    // Facturas
+    function renderFacturas() {
+      const tabla = document.getElementById('tablaFacturacion').querySelector('tbody');
+      tabla.innerHTML = '';
+      facturas.forEach((f, i) => {
+        tabla.innerHTML += `<tr><td>${f.paciente}</td><td>${f.monto}</td><td>${f.metodo}</td><td><button onclick="editarFactura(${i})">Editar</button><button onclick="eliminarFactura(${i})">Eliminar</button></td></tr>`;
+      });
+    }
+    function addFactura(event) {
+      event.preventDefault();
+      facturas.push({ paciente: pacienteFactura.value, monto: montoFactura.value, metodo: metodoPago.value });
+      localStorage.setItem('facturas', JSON.stringify(facturas));
+      renderFacturas();
+      event.target.reset();
+    }
+    function eliminarFactura(i) {
+      facturas.splice(i, 1);
+      localStorage.setItem('facturas', JSON.stringify(facturas));
+      renderFacturas();
+    }
+    function editarFactura(i) {
+      const f = facturas[i];
+      facturas[i] = {
+        paciente: prompt("Cliente", f.paciente),
+        monto: prompt("Monto", f.monto),
+        metodo: prompt("Método de pago", f.metodo)
+      };
+      localStorage.setItem('facturas', JSON.stringify(facturas));
+      renderFacturas();
+    }
+  </script>
+</body>
+</html>
